@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class User {
+	
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -18,7 +19,7 @@ public class User {
 	@Column(nullable = false)
 	private String direccion;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, length = 100)
 	private String nombre;
 	
 	@Column(nullable = false)
@@ -34,6 +35,19 @@ public class User {
 	public User() {
 		
 	}
+	
+	public User(Long id, String telefono, String direccion, String nombre, String apellido, String email,
+			String contrasenya) {
+		this.id = id;
+		this.telefono = telefono;
+		this.direccion = direccion;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.email = email;
+		this.contrasenya = contrasenya;
+	}
+
+
 
 
 	public Long getId() {
@@ -89,6 +103,15 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
+
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", telefono=" + telefono + ", direccion=" + direccion + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", email=" + email + ", contrasenya=" + contrasenya + "]";
+	}
+
+
 
 
 	public void setEmail(String email) {
