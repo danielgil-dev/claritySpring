@@ -33,12 +33,12 @@ public class Pedido {
 	
 	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private Enum estado;
+	private EstadoPedido estado;
 	
 	@Column (length=8, unique = true)
 	private String dni;
 	
-	@Column(nullable = false, precision = 10, scale = 2)
+	@Column(nullable = false)
 	private Double precio;
 	
 	@ManyToOne
@@ -47,7 +47,7 @@ public class Pedido {
 	
 	public Pedido () {}
 	
-	public Pedido(long id_pedido, String direccion, String nombre, Date fecha_pedido, String apellidos, Enum estado,
+	public Pedido(long id_pedido, String direccion, String nombre, Date fecha_pedido, String apellidos, EstadoPedido estado,
 			String dni, Double precio, User usuario) {
 		this.id_pedido = id_pedido;
 		this.direccion = direccion;
@@ -69,7 +69,7 @@ public class Pedido {
 	}
 
 
-	enum  estado {
+	enum  EstadoPedido {
 		Entegado,
 		Rechadazo,
 		Pendiente,
@@ -133,7 +133,7 @@ public class Pedido {
 	}
 
 
-	public void setEstado(Enum estado) {
+	public void setEstado(EstadoPedido estado) {
 		this.estado = estado;
 	}
 

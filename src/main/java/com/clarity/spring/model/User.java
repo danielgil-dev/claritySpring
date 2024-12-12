@@ -1,10 +1,13 @@
 package com.clarity.spring.model;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class User {
@@ -31,6 +34,8 @@ public class User {
 	@Column(name = "password",nullable = false)
 	private String contrasenya;
 	
+	@OneToMany
+	private List<Pedido> pedidos;
 	
 	public User() {
 		
@@ -126,6 +131,14 @@ public class User {
 
 	public void setContrasenya(String contrasenya) {
 		this.contrasenya = contrasenya;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
 	}
 
 
