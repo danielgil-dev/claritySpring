@@ -32,15 +32,18 @@ public class Reseña {
 	@Column(nullable = false)
 	private String contenido;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_usuario")
-	private User usuario;
+	private Usuario usuario;
 	
 	
-
+	public Reseña() {
+		
+	}
+	
 	public Reseña(Long id, LocalDate fecha,
 			@Min(value = 0, message = "La calificación no puede ser menor a 0.") @Max(value = 5, message = "La calificación no puede ser mayor a 5.") Integer calificacion,
-			String contenido, User usuario) {
+			String contenido, Usuario usuario) {
 		this.id = id;
 		this.fecha = fecha;
 		this.calificacion = calificacion;
@@ -80,11 +83,11 @@ public class Reseña {
 		this.contenido = contenido;
 	}
 
-	public User getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(User usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 

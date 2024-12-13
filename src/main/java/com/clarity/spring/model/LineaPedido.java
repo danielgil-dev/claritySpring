@@ -20,11 +20,11 @@ public class LineaPedido {
 	@Column(nullable = false)
 	private int cantidad;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_pedido")
 	private Pedido pedido;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_producto")
 	private Producto producto;
 

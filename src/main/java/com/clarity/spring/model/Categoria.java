@@ -13,7 +13,7 @@ public class Categoria {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id_categoria;
+	private Long categoria_id;
 	
 	@Column(nullable = false)
 	private String nombre;
@@ -25,21 +25,23 @@ public class Categoria {
 	@JoinColumn(name = "id_producto")
 	private Producto producto;
 	
-	public Categoria() {}
+	public Categoria() {
+		
+	}
 	
-	public Categoria(Long id_categoria, String nombre, String descripcion, Producto producto) {
-		this.id_categoria = id_categoria;
+	public Categoria(Long categoria_id, String nombre, String descripcion, Producto producto) {
+		this.categoria_id = categoria_id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.producto = producto;
 	}
 
-	public Long getId_categoria() {
-		return id_categoria;
+	public Long getCategoria_id() {
+		return categoria_id;
 	}
 
-	public void setId_categoria(Long id_categoria) {
-		this.id_categoria = id_categoria;
+	public void setCategoria_id(Long categoria_id) {
+		this.categoria_id = categoria_id;
 	}
 
 	public String getNombre() {
@@ -68,9 +70,12 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [id_categoria=" + id_categoria + ", nombre=" + nombre + ", descripcion=" + descripcion
+		return "Categoria [categoria_id=" + categoria_id + ", nombre=" + nombre + ", descripcion=" + descripcion
 				+ ", producto=" + producto + "]";
 	}
+	
+	
+	
 	
 	
 }

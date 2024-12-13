@@ -41,14 +41,14 @@ public class Pedido {
 	@Column(nullable = false)
 	private Double precio;
 	
-	@ManyToOne
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "usuario_id")
-	private User usuario; 
+	private Usuario usuario; 
 	
 	public Pedido () {}
 	
-	public Pedido(long id_pedido, String direccion, String nombre, Date fecha_pedido, String apellidos, EstadoPedido estado,
-			String dni, Double precio, User usuario) {
+	public Pedido(long id_pedido, String direccion, String nombre, Date fecha_pedido, String apellidos,
+			EstadoPedido estado, String dni, Double precio, Usuario usuario) {
 		this.id_pedido = id_pedido;
 		this.direccion = direccion;
 		this.nombre = nombre;
@@ -58,23 +58,6 @@ public class Pedido {
 		this.dni = dni;
 		this.precio = precio;
 		this.usuario = usuario;
-	}
-
-
-	@Override
-	public String toString() {
-		return "Pedido [id_pedido=" + id_pedido + ", direccion=" + direccion + ", nombre=" + nombre + ", fecha_pedido="
-				+ fecha_pedido + ", apellidos=" + apellidos + ", estado=" + estado + ", dni=" + dni + ", precio="
-				+ precio + ", usuario=" + usuario + "]";
-	}
-
-
-	enum  EstadoPedido {
-		Entegado,
-		Rechadazo,
-		Pendiente,
-		Carrito,
-		Enviado
 	}
 
 
@@ -82,91 +65,88 @@ public class Pedido {
 		return id_pedido;
 	}
 
-
 	public void setId_pedido(long id_pedido) {
 		this.id_pedido = id_pedido;
 	}
-
 
 	public String getDireccion() {
 		return direccion;
 	}
 
-
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
-
 
 	public String getNombre() {
 		return nombre;
 	}
 
-
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-
 
 	public Date getFecha_pedido() {
 		return fecha_pedido;
 	}
 
-
 	public void setFecha_pedido(Date fecha_pedido) {
 		this.fecha_pedido = fecha_pedido;
 	}
-
 
 	public String getApellidos() {
 		return apellidos;
 	}
 
-
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
 
-
-	public Enum getEstado() {
+	public EstadoPedido getEstado() {
 		return estado;
 	}
-
 
 	public void setEstado(EstadoPedido estado) {
 		this.estado = estado;
 	}
 
-
 	public String getDni() {
 		return dni;
 	}
-
 
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
 
-
 	public Double getPrecio() {
 		return precio;
 	}
-
 
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
 
-
-	public User getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-
-	public void setUsuario(User usuario) {
+	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
 	
+	public enum EstadoPedido{
+		Entregado,
+		Rechazado,
+		Pendiente,
+		Carrito,
+		Enviado
+	}
+
+	@Override
+	public String toString() {
+		return "Pedido [id_pedido=" + id_pedido + ", direccion=" + direccion + ", nombre=" + nombre + ", fecha_pedido="
+				+ fecha_pedido + ", apellidos=" + apellidos + ", estado=" + estado + ", dni=" + dni + ", precio="
+				+ precio + ", usuario=" + usuario + "]";
+	}
 	
 	
 	

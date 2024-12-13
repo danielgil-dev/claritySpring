@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class User {
+public class Usuario {
 	
 
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,14 +34,17 @@ public class User {
 	@Column(name = "password",nullable = false)
 	private String contrasenya;
 	
-	@OneToMany
+	@OneToMany(mappedBy = "usuario")
 	private List<Pedido> pedidos;
 	
-	public User() {
+	@OneToMany(mappedBy = "usuario")
+	private List<Reseña> reseñas;
+	
+	public Usuario() {
 		
 	}
 	
-	public User(Long id, String telefono, String direccion, String nombre, String apellido, String email,
+	public Usuario(Long id, String telefono, String direccion, String nombre, String apellido, String email,
 			String contrasenya) {
 		this.id = id;
 		this.telefono = telefono;
