@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
- <head th:replace ="Layouts/header :: head('Login')"></head>
+ <head th:replace="Layouts/header :: head (Inicio de sesión)"></head>
 <body id="login-page">
-    <main id="login-container">
-        <section>
-                <h2>Inicio de Sesión</h2>
-                <form id="login-form" action="" method="post" class="">
-                    <label for="email">Email</label>
-                    <input type="email" name="email" id="email" required>
-                    <label for="password">Contraseña</label>
-                    <input type="password" name="password" id="password" required>
-                    <button type="submit">Login</button>
-                    <button class="btn "><a href=".">Crear Cuenta</a></button>
-                </form>
-        </section>
-        <img src="">
+    <main>
+		<div class="container-fluid ">
+		       <h1 class="text-center">Login</h1>
+		       <div class="row  vh-100">
+		           <form>
+		               <div class="mb-3">
+		                   <label for="email" class="form-label">Email</label>
+		                   <input type="email" class="form-control" id="email">
+		               </div>
+		               <div class="mb-3">
+		                   <label for="exampleInputPassword1" class="form-label">Password</label>
+		                   <input type="password" class="form-control" id="exampleInputPassword1">
+		               </div> 
+		               <button type="submit" class="btn btn-primary">Submit</button>
+		           </form>
+		       </div>
+		   </div>
     </main>
 </body>
 </html>

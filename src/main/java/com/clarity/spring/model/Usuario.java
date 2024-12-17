@@ -28,8 +28,27 @@ public class Usuario {
 	@Column(nullable = false)
 	private String apellido;
 	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<Reseña> getReseñas() {
+		return reseñas;
+	}
+
+	public void setReseñas(List<Reseña> reseñas) {
+		this.reseñas = reseñas;
+	}
+
 	@Column(name ="email",nullable = false, unique = true)
 	private String email;
+	
+	@Column
+	private String role;
 	
 	@Column(name = "password",nullable = false)
 	private String contrasenya;
@@ -45,18 +64,18 @@ public class Usuario {
 	}
 	
 	public Usuario(Long id, String telefono, String direccion, String nombre, String apellido, String email,
-			String contrasenya) {
+			String role, String contrasenya, List<Pedido> pedidos, List<Reseña> reseñas) {
 		this.id = id;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
+		this.role = role;
 		this.contrasenya = contrasenya;
+		this.pedidos = pedidos;
+		this.reseñas = reseñas;
 	}
-
-
-
 
 	public Long getId() {
 		return id;
