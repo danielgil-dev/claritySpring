@@ -43,9 +43,9 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/webjars/**", "/css/**", "/h2-console/**").permitAll()
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/webjars/**", "/css/**", "/h2-console/**", "/index/**").permitAll()
 				.anyRequest().authenticated())
-				.formLogin(form -> form.loginPage("/auth/login").permitAll().defaultSuccessUrl("/"))
+				.formLogin(form -> form.loginPage("/auth/login").permitAll().defaultSuccessUrl("/index", true))
 				.logout(logout -> logout.permitAll()).csrf(csrf -> csrf.disable())
 				.headers(headers -> headers.frameOptions().disable());
 

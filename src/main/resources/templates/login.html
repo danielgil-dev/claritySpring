@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
- <head th:replace="Layouts/header :: head (Inicio de sesión)"></head>
+ <head th:replace="Layouts/header :: head ('Inicio de sesion')"></head>
 <body id="login-page">
     <main>
 		<div class="container-fluid ">
 		       <h1 class="text-center">Login</h1>
 		       <div class="row  vh-100">
-		           <form>
+		           <form th:action="@{auth/login}">
 		               <div class="mb-3">
-		                   <label for="email" class="form-label">Email</label>
+		                   <label for="email" class="form-label" name="username">Email</label>
 		                   <input type="email" class="form-control" id="email">
 		               </div>
 		               <div class="mb-3">
