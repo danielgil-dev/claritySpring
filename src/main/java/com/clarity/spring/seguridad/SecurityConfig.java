@@ -18,20 +18,13 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
 	@Autowired
-	UserDetailsService userDetailsService;
+	private UserDetailsService userDetailsService;
 
 	@Bean
 	protected BCryptPasswordEncoder getPasswordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
-	@Bean
-	InMemoryUserDetailsManager inmemoryUserDetailsManager() {
-		UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin").roles("ADMIN")
-				.build();
-
-		return new InMemoryUserDetailsManager(admin);
-	}
 
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
@@ -43,9 +36,9 @@ public class SecurityConfig {
 
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth -> auth.requestMatchers("/webjars/**", "/css/**", "/h2-console/**", "/index/**").permitAll()
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/webjars/**", "/css/**", "/h2-console/**", "/index/**", "/auth/login").permitAll()
 				.anyRequest().authenticated())
-				.formLogin(form -> form.loginPage("/auth/login").permitAll().defaultSuccessUrl("/index", true))
+				.formLogin(form -> form.loginPage("/auth/login").loginProcessingUrl("auth/login").permitAll().defaultSuccessUrl("/index", true))
 				.logout(logout -> logout.permitAll()).csrf(csrf -> csrf.disable())
 				.headers(headers -> headers.frameOptions().disable());
 
