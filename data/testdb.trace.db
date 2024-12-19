@@ -4907,3 +4907,6 @@ Caused by: org.h2.mvstore.MVStoreException: The file is locked: C:/Users/alumno/
 	at org.h2.mvstore.SingleFileStore.open(SingleFileStore.java:81)
 	at org.h2.mvstore.MVStore.<init>(MVStore.java:286)
 	... 58 more
+2024-12-19 18:51:15.113274+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SEELCT * FROM USUARIO"; expected "SAVEPOINT, SCRIPT, SHUTDOWN"; SQL statement:
+SEELCT * FROM USUARIO [42001-232]

@@ -9,5 +9,6 @@ import com.clarity.spring.model.Usuario;
 public interface UserRepository extends JpaRepository<Usuario,Long > {
 	
 	Optional<Usuario> findByEmailContainsIgnoreCase(String email);
+	boolean existsByemail(String email);
 	
 }

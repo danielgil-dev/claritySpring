@@ -38,7 +38,7 @@ public class SecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/webjars/**", "/css/**", "/h2-console/**", "/index/**", "/auth/login").permitAll()
 				.anyRequest().authenticated())
-				.formLogin(form -> form.loginPage("/auth/login").loginProcessingUrl("auth/login").permitAll().defaultSuccessUrl("/index", true))
+				.formLogin(form -> form.loginPage("/auth/login").loginProcessingUrl("/auth/login").permitAll().defaultSuccessUrl("/index", true))
 				.logout(logout -> logout.permitAll()).csrf(csrf -> csrf.disable())
 				.headers(headers -> headers.frameOptions().disable());
 

@@ -2,7 +2,7 @@ package com.clarity.spring.model;
 
 import java.util.List;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,27 +28,11 @@ public class Usuario {
 	@Column(nullable = false)
 	private String apellido;
 	
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public List<Reseña> getReseñas() {
-		return reseñas;
-	}
-
-	public void setReseñas(List<Reseña> reseñas) {
-		this.reseñas = reseñas;
-	}
-
 	@Column(name ="email",nullable = false, unique = true)
 	private String email;
 	
-	@Column
-	private String role;
+	@Column( nullable = false)
+	private String role = "usuario";
 	
 	@Column(name = "password",nullable = false)
 	private String contrasenya;
@@ -64,14 +48,14 @@ public class Usuario {
 	}
 	
 	public Usuario(Long id, String telefono, String direccion, String nombre, String apellido, String email,
-			String role, String contrasenya, List<Pedido> pedidos, List<Reseña> reseñas) {
+			 String contrasenya, List<Pedido> pedidos, List<Reseña> reseñas) {
 		this.id = id;
 		this.telefono = telefono;
 		this.direccion = direccion;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.email = email;
-		this.role = role;
+		this.role = "usuario";
 		this.contrasenya = contrasenya;
 		this.pedidos = pedidos;
 		this.reseñas = reseñas;
@@ -161,6 +145,21 @@ public class Usuario {
 
 	public void setPedidos(List<Pedido> pedidos) {
 		this.pedidos = pedidos;
+	}
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<Reseña> getReseñas() {
+		return reseñas;
+	}
+
+	public void setReseñas(List<Reseña> reseñas) {
+		this.reseñas = reseñas;
 	}
 
 
