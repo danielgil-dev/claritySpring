@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="Layouts/header :: head ('Registro')"></head>
+<body>
+	<h1 class="Display-1">Crear Cuenta</h1>
+	<form th:action="@{/auth/register}" th:object="${usuario}"
+		method="post" class="align-content-center">
+		<div th:if="${error}" style="color: red;">
+			<p th:text="${error}"></p>
+		</div>
+		<div class="mb-3">
+			<label for="nombre">Nombre</label> <input class="form-control-sm"
+				type="text"  id="nombre" th:field="*{nombre}">
+				  <div th:if="${#fields.hasErrors('nombre')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('nombre')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class="mb-3">
+			<label for="apellido">Apellido</label> <input class="form-control-sm"
+				type="text"  id="apellido" th:field="*{apellido}">
+				  <div th:if="${#fields.hasErrors('apellido')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('apellido')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class="mb-3">
+			<label for="direccion">Direccion</label> <input
+				class="form-control-sm" type="text"  id="direccion"
+				th:field="*{direccion}">
+				  <div th:if="${#fields.hasErrors('direccion')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('direccion')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class="mb-3">
+			<label for="email">Email</label> <input class="form-control-sm"
+				type="email"  id="email" th:field="*{email}">
+				  <div th:if="${#fields.hasErrors('email')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class="mb-3">
+			<label for="password">Contraseña</label> <input
+				class="form-control-sm" type="password" 
+				id="password" th:field="*{contrasenya}">
+				  <div th:if="${#fields.hasErrors('contrasenya')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('contrasenya')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class=" mb-3">
+			<label for="telefono">Telefono</label> <input class="form-control-sm"
+				type="text"  id="telefono" th:field="*{telefono}">
+				  <div th:if="${#fields.hasErrors('telefono')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('telefono')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
+		<div class="mb-3">
+			<button class="btn btn-primary" type="submit">Crear Cuenta</button>
+		</div>
+	</form>
+
+
+</body>
+</html>

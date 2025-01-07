@@ -8,6 +8,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Usuario {
@@ -16,24 +19,32 @@ public class Usuario {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank(message = "Campo obligatorio")
 	@Column(nullable = false)
 	private String telefono;
 	
+	@NotBlank(message = "Campo obligatorio")
 	@Column(nullable = false)
 	private String direccion;
 	
+	@NotBlank(message = "Campo obligatorio")
 	@Column(nullable = false, length = 100)
 	private String nombre;
 	
+	@NotBlank(message = "Campo obligatorio")
 	@Column(nullable = false)
 	private String apellido;
 	
+	@Email(message = "Debe proporcionar un email válido")
+	@NotBlank(message = "Campo obligatorio")
 	@Column(name ="email",nullable = false, unique = true)
 	private String email;
 	
 	@Column( nullable = false)
 	private String role = "usuario";
 	
+	@Size(min=8, message = "La contraseña debe de tener minimo 8 caracteres")
+	@NotBlank(message = "Campo obligatorio")
 	@Column(name = "password",nullable = false)
 	private String contrasenya;
 	
@@ -47,16 +58,16 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(Long id, String telefono, String direccion, String nombre, String apellido, String email,
-			 String contrasenya, List<Pedido> pedidos, List<Reseña> reseñas) {
+	public Usuario(Long id, String nombre, String apellido, String direccion, String email, String contrasenya,
+			 String telefono, List<Pedido> pedidos, List<Reseña> reseñas) {
 		this.id = id;
-		this.telefono = telefono;
-		this.direccion = direccion;
 		this.nombre = nombre;
 		this.apellido = apellido;
+		this.direccion = direccion;
 		this.email = email;
-		this.role = "usuario";
 		this.contrasenya = contrasenya;
+		this.telefono = telefono;
+		this.role = "usuario";
 		this.pedidos = pedidos;
 		this.reseñas = reseñas;
 	}
@@ -116,14 +127,16 @@ public class Usuario {
 	}
 
 
+	
+
+
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", telefono=" + telefono + ", direccion=" + direccion + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", email=" + email + ", contrasenya=" + contrasenya + "]";
+		return "Usuario [id=" + id + ", telefono=" + telefono + ", direccion=" + direccion + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", email=" + email + ", role=" + role + ", contrasenya=" + contrasenya
+				+ ", pedidos=" + pedidos + ", reseñas=" + reseñas + "]";
 	}
-
-
-
 
 	public void setEmail(String email) {
 		this.email = email;
