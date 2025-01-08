@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="Layouts/header :: head ('Registro')"></head>
+<head th:replace="Layouts/head :: head ('Registro')"></head>
 <body>
+<header th:replace="Layouts/header :: header"></header>
 	<h1 class="Display-1">Crear Cuenta</h1>
 	<form th:action="@{/auth/register}" th:object="${usuario}"
 		method="post" class="align-content-center">
@@ -63,7 +64,5 @@
 			<button class="btn btn-primary" type="submit">Crear Cuenta</button>
 		</div>
 	</form>
-
-
 </body>
 </html>

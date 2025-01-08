@@ -38,13 +38,10 @@ public class AuthController {
 	public String registerUser(@Valid @ModelAttribute Usuario usuario, BindingResult result, Model model) {
 		
 		if(result.hasErrors()) {
-			  result.getFieldErrors().forEach(error -> {
-			        System.out.println("Campo: " + error.getField());
-			        System.out.println("Error: " + error.getDefaultMessage());
-			    });
 			model.addAttribute(usuario);
 			return "register";
 		}
+		
 		try {
 			userService.registerUser(usuario.getNombre(), usuario.getApellido(), usuario.getDireccion(), usuario.getEmail(), usuario.getContrasenya(), usuario.getTelefono());
 			return "redirect:/auth/login";
