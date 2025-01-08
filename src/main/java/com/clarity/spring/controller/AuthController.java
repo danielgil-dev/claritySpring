@@ -25,13 +25,13 @@ public class AuthController {
 	@GetMapping("/login")
 	public String loginPage() {
 		
-		return "login";
+		return "public/login";
 	}
 	
 	@GetMapping("/register")
 	public String showRegistrationForm(Model model){
 		model.addAttribute("usuario", new Usuario());
-		return "register";
+		return "public/register";
 	}
 	
 	@PostMapping("/register")
@@ -39,7 +39,7 @@ public class AuthController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute(usuario);
-			return "register";
+			return "public/register";
 		}
 		
 		try {
@@ -48,6 +48,6 @@ public class AuthController {
 		}catch(Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "register";
+		return "public/register";
 	}
 }
