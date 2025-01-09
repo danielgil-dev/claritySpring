@@ -4,12 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class HomeController {
+public class ProductController {
 	
-	@GetMapping("/index")
-	public String index() {
+	@GetMapping("/products")
+	public String productPage() {
 		
-		return "public/index";
+		return "public/products";
 	}
-	
+
 }
