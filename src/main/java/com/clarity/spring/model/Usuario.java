@@ -81,10 +81,16 @@ public class Usuario {
 		this.id = id;
 	}
 
-
+	public void deletePedido(Pedido p) {
+		// Delete del arrayList igualando el id del pedido que me llega por parametro 
+		p.setUsuario(null);
+	}
+	
 	public String getTelefono() {
 		return telefono;
 	}
+	
+	
 
 
 	public void setTelefono(String telefono) {
