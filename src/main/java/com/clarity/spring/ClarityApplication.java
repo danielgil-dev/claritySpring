@@ -20,9 +20,9 @@ public class ClarityApplication {
 		SpringApplication.run(ClarityApplication.class, args);
 	}
 	
-	
+/*
 	@Bean
-	CommandLineRunner initCategory(CategoryRepository categoryRepository) {
+	CommandLineRunner initData(CategoryRepository categoryRepository,ProductRepository	productRepository) {
 		return (args)->{
 			
 		    Categoria ropa = new Categoria(null, "Ropa", "Categoría general de ropa");
@@ -30,35 +30,31 @@ public class ClarityApplication {
 		    Categoria accesorios = new Categoria(null, "Accesorios", "Complementos y accesorios");
 		    Categoria invierno = new Categoria(null, "Invierno", "Ropa y accesorios para el frío");
 		    
-			categoryRepository.save(ropa);
-			categoryRepository.save(calzado);
-			categoryRepository.save(accesorios);
-			categoryRepository.save(invierno);
+		    categoryRepository.saveAll(List.of(ropa,calzado,accesorios,invierno));
+			
+			
+			Producto camisetaAzul = new Producto(null, 24.99, "camiseta-azul.jpg", "Camiseta básica de algodón", "Camiseta Azul", 50L);
+		    Producto zapatillasBlancas = new Producto(null, 59.99, "zapatillas-blancas.jpg", "Zapatillas deportivas blancas", "Zapatillas Blancas", 30L);
+		    Producto guantesNegros = new Producto(null, 14.99, "guantes-negros.jpg", "Guantes de lana negros", "Guantes Negros", 25L);
+		    Producto chaquetaInvierno = new Producto(null, 89.99, "chaqueta-invierno.jpg", "Chaqueta acolchada de invierno", "Chaqueta Invierno", 20L);
+		    
+		    productRepository.saveAll(List.of(camisetaAzul,zapatillasBlancas,guantesNegros,chaquetaInvierno));
+		    
+		    camisetaAzul.addCategoria(ropa);
+		    zapatillasBlancas.addCategoria(ropa);
+		    guantesNegros.addCategoria(ropa);
+		    guantesNegros.addCategoria(invierno);
+		    chaquetaInvierno.addCategoria(ropa);
+		    chaquetaInvierno.addCategoria(invierno);
+	        
+	       
+			productRepository.saveAll(List.of(camisetaAzul, guantesNegros, chaquetaInvierno,zapatillasBlancas));
+	      
 			
 		};
 	}
-	
-	@Bean
-	CommandLineRunner initProduct(ProductRepository	productRepository, CategoryRepository categoryRepository ) {
-		return (args) ->{
-			
-			Producto camisetaAzul = new Producto(1L, 24.99, "camiseta-azul.jpg", "Camiseta básica de algodón", "Camiseta Azul", 50L);
-		    Producto zapatillasBlancas = new Producto(2L, 59.99, "zapatillas-blancas.jpg", "Zapatillas deportivas blancas", "Zapatillas Blancas", 30L);
-		    Producto guantesNegros = new Producto(3L, 14.99, "guantes-negros.jpg", "Guantes de lana negros", "Guantes Negros", 25L);
-		    Producto chaquetaInvierno = new Producto(4L, 89.99, "chaqueta-invierno.jpg", "Chaqueta acolchada de invierno", "Chaqueta Invierno", 20L);
-		    
+	*/
 
-		    
-		    camisetaAzul.getCategorias().add(categoryRepository.findByNombre("Ropa"));
-		
-		    productRepository.save(camisetaAzul);	
-		    productRepository.save(zapatillasBlancas);
-		    productRepository.save(guantesNegros);
-		    productRepository.save(chaquetaInvierno);
-	    
-		};
-	}
-		
 	
 
 }
