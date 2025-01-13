@@ -43,6 +43,10 @@ public class Usuario {
 	@Column( nullable = false)
 	private String role = "usuario";
 	
+	@Size(min= 9, message = "Debe proporcionar un dni valido ")
+	@Column(nullable = false)
+	private String dni;
+	
 	@Size(min=8, message = "La contraseña debe de tener minimo 8 caracteres")
 	@NotBlank(message = "Campo obligatorio")
 	@Column(name = "password",nullable = false)
@@ -58,19 +62,30 @@ public class Usuario {
 		
 	}
 	
-	public Usuario(Long id, String nombre, String apellido, String direccion, String email, String contrasenya,
-			 String telefono, List<Pedido> pedidos, List<Reseña> reseñas) {
+
+
+	public Usuario(Long id, @NotBlank(message = "Campo obligatorio") String telefono,
+			@NotBlank(message = "Campo obligatorio") String direccion,
+			@NotBlank(message = "Campo obligatorio") String nombre,
+			@NotBlank(message = "Campo obligatorio") String apellido,
+			@Email(message = "Debe proporcionar un email válido") @NotBlank(message = "Campo obligatorio") String email,
+			String role, String dni,
+			@Size(min = 8, message = "La contraseña debe de tener minimo 8 caracteres") @NotBlank(message = "Campo obligatorio") String contrasenya,
+			List<Pedido> pedidos, List<Reseña> reseñas) {
 		this.id = id;
+		this.telefono = telefono;
+		this.direccion = direccion;
 		this.nombre = nombre;
 		this.apellido = apellido;
-		this.direccion = direccion;
 		this.email = email;
+		this.role = role;
+		this.dni = dni;
 		this.contrasenya = contrasenya;
-		this.telefono = telefono;
-		this.role = "usuario";
 		this.pedidos = pedidos;
 		this.reseñas = reseñas;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -126,7 +141,14 @@ public class Usuario {
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
-
+	
+	public String getDni() {
+		return this.dni;
+	}
+	
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
 
 	public String getEmail() {
 		return email;
