@@ -1,6 +1,0 @@
-2025-01-11 13:26:56.924972+01:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "CATEGORIA_PRODUCTO" not found; SQL statement:
-SELECT * FROM CATEGORIA_PRODUCTO [42102-232]
-2025-01-11 14:13:37.959284+01:00 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIOS" not found; SQL statement:
-SELECT * FROM usuarios [42102-232]

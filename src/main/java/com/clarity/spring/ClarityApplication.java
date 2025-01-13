@@ -20,7 +20,8 @@ public class ClarityApplication {
 		SpringApplication.run(ClarityApplication.class, args);
 	}
 	
-/*
+/*	
+
 	@Bean
 	CommandLineRunner initData(CategoryRepository categoryRepository,ProductRepository	productRepository) {
 		return (args)->{
@@ -33,10 +34,10 @@ public class ClarityApplication {
 		    categoryRepository.saveAll(List.of(ropa,calzado,accesorios,invierno));
 			
 			
-			Producto camisetaAzul = new Producto(null, 24.99, "camiseta-azul.jpg", "Camiseta básica de algodón", "Camiseta Azul", 50L);
-		    Producto zapatillasBlancas = new Producto(null, 59.99, "zapatillas-blancas.jpg", "Zapatillas deportivas blancas", "Zapatillas Blancas", 30L);
-		    Producto guantesNegros = new Producto(null, 14.99, "guantes-negros.jpg", "Guantes de lana negros", "Guantes Negros", 25L);
-		    Producto chaquetaInvierno = new Producto(null, 89.99, "chaqueta-invierno.jpg", "Chaqueta acolchada de invierno", "Chaqueta Invierno", 20L);
+			Producto camisetaAzul = new Producto(null, 24.99, "camiseta-azul.png", "Camiseta básica de algodón", "Camiseta Azul", 50L);
+		    Producto zapatillasBlancas = new Producto(null, 59.99, "zapatillas-blancas.png", "Zapatillas deportivas blancas", "Zapatillas Blancas", 30L);
+		    Producto guantesNegros = new Producto(null, 14.99, "guantes-marron.png", "Guantes de lana marron", "Guantes marron", 25L);
+		    Producto chaquetaInvierno = new Producto(null, 89.99, "chaqueta-verde.png", "Chaqueta acolchada de invierno", "Chaqueta Invierno", 20L);
 		    
 		    productRepository.saveAll(List.of(camisetaAzul,zapatillasBlancas,guantesNegros,chaquetaInvierno));
 		    
@@ -53,9 +54,8 @@ public class ClarityApplication {
 			
 		};
 	}
-	*/
 
-	
+	*/
 
 }
 
