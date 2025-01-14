@@ -29,6 +29,9 @@ public class LineaPedido {
 	private Producto producto;
 
 	
+	public LineaPedido() {
+		
+	}
 	public LineaPedido(long id_linea_pedido, Double precio_total, int cantidad, Pedido pedido, Producto producto) {
 		this.id_linea_pedido = id_linea_pedido;
 		this.precio_total = precio_total;

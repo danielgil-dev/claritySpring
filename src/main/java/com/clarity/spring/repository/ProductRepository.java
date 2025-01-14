@@ -11,5 +11,5 @@ import com.clarity.spring.model.Producto;
 public interface ProductRepository extends JpaRepository<Producto,Long> {
 	
 	Producto findByNombre(String name);
-	
+	Producto findByProductoId(Long idProducto);
 }

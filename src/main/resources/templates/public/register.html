@@ -60,6 +60,14 @@
         </div>
 		</div>
 		
+			<div class="mb-3">
+			<label for="dni">Dni</label> <input class="form-control-sm"
+				type="text"  id="dni" th:field="*{dni}">
+				  <div th:if="${#fields.hasErrors('dni')}" style="color: red;">
+            <p th:each="err : ${#fields.errors('dni')}" th:text="${err}"></p>
+        </div>
+		</div>
+		
 		<div class="mb-3">
 			<button class="btn btn-primary" type="submit">Crear Cuenta</button>
 		</div>

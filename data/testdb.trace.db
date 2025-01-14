@@ -1,0 +1,9 @@
+2025-01-14 18:38:41.073480+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DNI CHARACTER VARYING(8)": "'04718056C' (9)"; SQL statement:
+insert into pedido (apellidos,direccion,dni,estado,fecha_pedido,nombre,precio,usuario_id,id_pedido) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2025-01-14 18:40:15.221346+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DNI CHARACTER VARYING(8)": "'04718056C' (9)"; SQL statement:
+insert into pedido (apellidos,direccion,dni,estado,fecha_pedido,nombre,precio,usuario_id,id_pedido) values (?,?,?,?,?,?,?,?,default) [22001-232]
+2025-01-14 18:51:39.104071+01:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "DNI CHARACTER VARYING(8)": "'04718026J' (9)"; SQL statement:
+insert into pedido (apellidos,direccion,dni,estado,fecha_pedido,nombre,precio,usuario_id,id_pedido) values (?,?,?,?,?,?,?,?,default) [22001-232]

@@ -1,7 +1,10 @@
 package com.clarity.spring.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -11,6 +14,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 
 @Entity
 public class Pedido {
@@ -26,7 +31,7 @@ public class Pedido {
 	private String nombre;
 	
 	@Column(nullable = false)
-	private Date fecha_pedido;
+	private LocalDateTime fecha_pedido;
 	
 	@Column(nullable = false, length = 100)
 	private String apellidos;
@@ -35,7 +40,7 @@ public class Pedido {
 	@Column(nullable = false)
 	private EstadoPedido estado;
 	
-	@Column (length=8, unique = true)
+	@Column (length=9)
 	private String dni;
 	
 	@Column(nullable = false)
@@ -45,10 +50,19 @@ public class Pedido {
 	@JoinColumn(name = "usuario_id")
 	private Usuario usuario; 
 	
+	//Esto me indica que un pedido puede tener muchas lineas de pedido asociadas al pedido
+	//El mappedBy me indica que el campo pedido en la clase LineaPedido, hace que la lineaDePedido sea el propietario de la relacion 
+	@OneToMany(mappedBy = "pedido" , cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<LineaPedido> lineasPedido = new ArrayList<>();
+	
 	public Pedido () {}
 	
-	public Pedido(long id_pedido, String direccion, String nombre, Date fecha_pedido, String apellidos,
-			EstadoPedido estado, String dni, Double precio, Usuario usuario) {
+
+
+	
+
+	public Pedido(long id_pedido, String direccion, String nombre, LocalDateTime fecha_pedido, String apellidos,
+			EstadoPedido estado, String dni, Double precio, Usuario usuario, List<LineaPedido> lineasPedido) {
 		this.id_pedido = id_pedido;
 		this.direccion = direccion;
 		this.nombre = nombre;
@@ -58,7 +72,40 @@ public class Pedido {
 		this.dni = dni;
 		this.precio = precio;
 		this.usuario = usuario;
+		this.lineasPedido = lineasPedido;
 	}
+
+
+
+
+
+	@PrePersist
+	public void onCreateDate() {
+		//Antes de que JPA cree mi entidad pedido si no hay una fecha le asigno la fecha actual
+		if(fecha_pedido == null) {fecha_pedido = LocalDateTime.now();}
+			
+	}
+	
+	public List<LineaPedido> getLineasPedido() {
+		return lineasPedido;
+	}
+
+	public void setLineasPedido(List<LineaPedido> lineasPedido) {
+		this.lineasPedido = lineasPedido;
+	}
+	
+	//Metodos helper para mantener la relacion entre mis entidades Pedido y LineaDePedidos
+	//Establezco los 
+	public void agregarLineaPedido(LineaPedido lineaPedido) {
+		this.lineasPedido.add(lineaPedido);
+		lineaPedido.setPedido(this);
+	}
+	
+	public void eliminarLineaPedido(LineaPedido lineaPedido) {
+		this.lineasPedido.remove(lineaPedido);
+		lineaPedido.setPedido(null);
+	}
+
 
 
 	public long getId_pedido() {
@@ -85,11 +132,13 @@ public class Pedido {
 		this.nombre = nombre;
 	}
 
-	public Date getFecha_pedido() {
+	
+
+	public LocalDateTime getFecha_pedido() {
 		return fecha_pedido;
 	}
 
-	public void setFecha_pedido(Date fecha_pedido) {
+	public void setFecha_pedido(LocalDateTime fecha_pedido) {
 		this.fecha_pedido = fecha_pedido;
 	}
 

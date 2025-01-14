@@ -10,5 +10,6 @@ import com.clarity.spring.model.Usuario;
 @Repository
 public interface OrderRepository extends JpaRepository<Pedido, Long > {
 	
-	Pedido  findByUsuarioAndEstado(Usuario usuario, EstadoPedido estadtopedido);
+	Pedido findByUsuarioAndEstado(Usuario usuario, EstadoPedido estadoPedido);
+	
 }

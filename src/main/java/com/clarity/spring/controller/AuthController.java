@@ -43,7 +43,7 @@ public class AuthController {
 		}
 		
 		try {
-			userService.registerUser(usuario.getNombre(), usuario.getApellido(), usuario.getDireccion(), usuario.getEmail(), usuario.getContrasenya(), usuario.getTelefono());
+			userService.registerUser(usuario.getNombre(), usuario.getApellido(), usuario.getDireccion(), usuario.getEmail(), usuario.getContrasenya(), usuario.getTelefono(), usuario.getDni());
 			return "redirect:/auth/login";
 		}catch(Exception e) {
 			model.addAttribute("error", e.getMessage());

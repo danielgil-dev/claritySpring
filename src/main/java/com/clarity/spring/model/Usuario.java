@@ -43,8 +43,8 @@ public class Usuario {
 	@Column( nullable = false)
 	private String role = "usuario";
 	
-	@Size(min= 9, message = "Debe proporcionar un dni valido ")
-	@Column(nullable = false)
+	@Size( min= 9, message = "Debe proporcionar un dni valido ")
+	@Column(nullable = false, length=9, unique=true)
 	private String dni;
 	
 	@Size(min=8, message = "La contraseña debe de tener minimo 8 caracteres")
@@ -64,12 +64,15 @@ public class Usuario {
 	
 
 
+
+
+
 	public Usuario(Long id, @NotBlank(message = "Campo obligatorio") String telefono,
 			@NotBlank(message = "Campo obligatorio") String direccion,
 			@NotBlank(message = "Campo obligatorio") String nombre,
 			@NotBlank(message = "Campo obligatorio") String apellido,
 			@Email(message = "Debe proporcionar un email válido") @NotBlank(message = "Campo obligatorio") String email,
-			String role, String dni,
+			String role, @Size(min = 9, message = "Debe proporcionar un dni valido ") String dni,
 			@Size(min = 8, message = "La contraseña debe de tener minimo 8 caracteres") @NotBlank(message = "Campo obligatorio") String contrasenya,
 			List<Pedido> pedidos, List<Reseña> reseñas) {
 		this.id = id;
@@ -84,6 +87,9 @@ public class Usuario {
 		this.pedidos = pedidos;
 		this.reseñas = reseñas;
 	}
+
+
+
 
 
 
@@ -155,17 +161,6 @@ public class Usuario {
 	}
 
 
-	
-
-
-
-	@Override
-	public String toString() {
-		return "Usuario [id=" + id + ", telefono=" + telefono + ", direccion=" + direccion + ", nombre=" + nombre
-				+ ", apellido=" + apellido + ", email=" + email + ", role=" + role + ", contrasenya=" + contrasenya
-				+ ", pedidos=" + pedidos + ", reseñas=" + reseñas + "]";
-	}
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -203,6 +198,17 @@ public class Usuario {
 		this.reseñas = reseñas;
 	}
 
+
+
+
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", telefono=" + telefono + ", direccion=" + direccion + ", nombre=" + nombre
+				+ ", apellido=" + apellido + ", email=" + email + ", role=" + role + ", contrasenya=" + contrasenya
+				+ ", pedidos=" + pedidos + ", reseñas=" + reseñas + "]";
+	}
+
+	
 
 
 	

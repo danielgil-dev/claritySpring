@@ -20,8 +20,8 @@ public class ClarityApplication {
 		SpringApplication.run(ClarityApplication.class, args);
 	}
 	
-/*	
 
+	/*
 	@Bean
 	CommandLineRunner initData(CategoryRepository categoryRepository,ProductRepository	productRepository) {
 		return (args)->{
