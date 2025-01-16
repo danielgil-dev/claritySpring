@@ -11,14 +11,14 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class LineaPedido {
 	
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY )
-	private long id_linea_pedido;
+	@Id @Column(name = "id_linea_pedido") @GeneratedValue(strategy = GenerationType.IDENTITY )
+	private long lineaPedidoId;
 	
 	@Column(nullable = false)
 	private Double precio_total;
 	
 	@Column(nullable = false)
-	private int cantidad;
+	private Long cantidad;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_pedido")
@@ -32,8 +32,8 @@ public class LineaPedido {
 	public LineaPedido() {
 		
 	}
-	public LineaPedido(long id_linea_pedido, Double precio_total, int cantidad, Pedido pedido, Producto producto) {
-		this.id_linea_pedido = id_linea_pedido;
+	public LineaPedido(long id_linea_pedido, Double precio_total, Long cantidad, Pedido pedido, Producto producto) {
+		this.lineaPedidoId = id_linea_pedido;
 		this.precio_total = precio_total;
 		this.cantidad = cantidad;
 		this.pedido = pedido;
@@ -41,11 +41,11 @@ public class LineaPedido {
 	}
 
 	public long getId_linea_pedido() {
-		return id_linea_pedido;
+		return lineaPedidoId;
 	}
 
 	public void setId_linea_pedido(long id_linea_pedido) {
-		this.id_linea_pedido = id_linea_pedido;
+		this.lineaPedidoId = id_linea_pedido;
 	}
 
 	public Double getPrecio_total() {
@@ -56,11 +56,11 @@ public class LineaPedido {
 		this.precio_total = precio_total;
 	}
 
-	public int getCantidad() {
+	public Long getCantidad() {
 		return cantidad;
 	}
 
-	public void setCantidad(int cantidad) {
+	public void setCantidad(Long cantidad) {
 		this.cantidad = cantidad;
 	}
 
@@ -79,10 +79,15 @@ public class LineaPedido {
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}
-
+	
+	public Double calcularTotalLinea(Producto producto, Long cantidad) {
+		
+		return producto.getPrecio() * cantidad;
+	}
+	
 	@Override
 	public String toString() {
-		return "LineaPedido [id_linea_pedido=" + id_linea_pedido + ", precio_total=" + precio_total + ", cantidad="
+		return "LineaPedido [id_linea_pedido=" + lineaPedidoId + ", precio_total=" + precio_total + ", cantidad="
 				+ cantidad + ", pedido=" + pedido + ", producto=" + producto + "]";
 	}
 	

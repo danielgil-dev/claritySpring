@@ -21,8 +21,8 @@ import jakarta.persistence.PrePersist;
 public class Pedido {
 	
 	@Id
-	@Column @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_pedido;
+	@Column(name="id_pedido") @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long pedidoId;
 	
 	@Column(nullable = false)
 	private String direccion;
@@ -57,13 +57,9 @@ public class Pedido {
 	
 	public Pedido () {}
 	
-
-
-	
-
 	public Pedido(long id_pedido, String direccion, String nombre, LocalDateTime fecha_pedido, String apellidos,
 			EstadoPedido estado, String dni, Double precio, Usuario usuario, List<LineaPedido> lineasPedido) {
-		this.id_pedido = id_pedido;
+		this.pedidoId= id_pedido;
 		this.direccion = direccion;
 		this.nombre = nombre;
 		this.fecha_pedido = fecha_pedido;
@@ -109,11 +105,11 @@ public class Pedido {
 
 
 	public long getId_pedido() {
-		return id_pedido;
+		return pedidoId;
 	}
 
 	public void setId_pedido(long id_pedido) {
-		this.id_pedido = id_pedido;
+		this.pedidoId = id_pedido;
 	}
 
 	public String getDireccion() {
@@ -192,7 +188,7 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return "Pedido [id_pedido=" + id_pedido + ", direccion=" + direccion + ", nombre=" + nombre + ", fecha_pedido="
+		return "Pedido [id_pedido=" + pedidoId + ", direccion=" + direccion + ", nombre=" + nombre + ", fecha_pedido="
 				+ fecha_pedido + ", apellidos=" + apellidos + ", estado=" + estado + ", dni=" + dni + ", precio="
 				+ precio + ", usuario=" + usuario + "]";
 	}

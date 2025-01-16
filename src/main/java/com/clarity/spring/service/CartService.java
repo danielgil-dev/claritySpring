@@ -39,8 +39,7 @@ public class CartService {
 		pedidoNuevo.setDireccion(usuario.getDireccion());
 		pedidoNuevo.setDni(usuario.getDni());
 		pedidoNuevo.setEstado(EstadoPedido.Carrito);
-		pedidoNuevo.setPrecio(producto.getPrecio());
-
+		pedidoNuevo.setPrecio(0.0);
 		return orderRepository.save(pedidoNuevo);
 		
 	}
@@ -55,15 +54,37 @@ public class CartService {
 		
 			
 		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario, EstadoPedido.Carrito);
-		if(pedido == null){crearNuevoCarrito(usuario, producto.getProducto_id()); }
+		if(pedido == null){
+			
+			pedido = crearNuevoCarrito(usuario, producto.getProducto_id());
+			orderRepository.save(pedido);
+			}
 					
 					 
-		LineaPedido lineaPedido = orderLineRepository.findByPedidoAndProducto(pedido.getId_pedido(),idProducto);	
+		LineaPedido lineaPedido = orderLineRepository.findByPedidoAndProducto(pedido,producto);	
 		if(lineaPedido == null) {
+			lineaPedido = new LineaPedido();
+			lineaPedido.setCantidad(1L);
+			lineaPedido.setProducto(producto);
+			lineaPedido.setPedido(pedido);
+			lineaPedido.setPrecio_total(lineaPedido.calcularTotalLinea(producto, lineaPedido.getCantidad()));
 			
+		}else {
+			 actualizarLineaPedido(lineaPedido, producto, 1L);
+			 orderLineRepository.save(lineaPedido);
 		}
-		 orderRepository.save(pedido);
+		
 		 
+		 
+	}
+	
+	private void actualizarLineaPedido(LineaPedido lineaPedido, Producto producto, Long cantidadIncremento) {
+	    Long nuevaCantidad = lineaPedido.getCantidad() + cantidadIncremento;
+	    if (nuevaCantidad > producto.getCantidad_stock()) {
+	        throw new IllegalArgumentException("Stock insuficiente para incrementar la cantidad");
+	    }
+	    lineaPedido.setCantidad(nuevaCantidad);
+	    lineaPedido.setPrecio_total(lineaPedido.calcularTotalLinea(producto, nuevaCantidad));
 	}
 	
 	

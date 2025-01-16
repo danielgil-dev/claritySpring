@@ -4,7 +4,9 @@ package com.clarity.spring.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,9 +19,9 @@ import jakarta.persistence.OneToMany;
 @Entity
 public class Producto {
 	
-	@Id
+	@Id @Column(name= "producto_id")
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Long producto_id;
+	private Long productoId;
 	
 	@Column(nullable = false)
 	private Double precio;
@@ -36,6 +38,11 @@ public class Producto {
 	@Column(nullable = false)
 	private Long cantidad_stock;
 	
+	 @Column(name="talla", nullable = false) 
+	 @ElementCollection 
+	 @CollectionTable(name = "producto_tallas", joinColumns = @JoinColumn(name = "producto_id"))
+	 private List<String> tallasDisponibles = new ArrayList<>();
+	 
 	@OneToMany (mappedBy = "producto")
 	private List<LineaPedido> lineaPedidos;
 	
@@ -55,7 +62,7 @@ public class Producto {
 	
 	public Producto(Long producto_id, Double precio, String imagen, String descripcion, String nombre,
 			Long cantidad_stock) {
-		this.producto_id = producto_id;
+		this.productoId = producto_id;
 		this.precio = precio;
 		this.imagen = imagen;
 		this.descripcion = descripcion;
@@ -66,24 +73,26 @@ public class Producto {
 	
 
 	public Producto(Long producto_id, Double precio, String imagen, String descripcion, String nombre,
-			Long cantidad_stock, List<LineaPedido> lineaPedidos, List<Reseña> reseñas, List<Categoria> categorias) {
-		this.producto_id = producto_id;
+			Long cantidad_stock, List<String> tallasDisponibles, List<LineaPedido> lineaPedidos, List<Reseña> reseñas,
+			List<Categoria> categorias) {
+		this.productoId = producto_id;
 		this.precio = precio;
 		this.imagen = imagen;
 		this.descripcion = descripcion;
 		this.nombre = nombre;
 		this.cantidad_stock = cantidad_stock;
+		this.tallasDisponibles = tallasDisponibles;
 		this.lineaPedidos = lineaPedidos;
 		this.reseñas = reseñas;
 		this.categorias = categorias;
 	}
 
 	public Long getProducto_id() {
-		return producto_id;
+		return productoId;
 	}
 
 	public void setProducto_id(Long producto_id) {
-		this.producto_id = producto_id;
+		this.productoId = producto_id;
 	}
 
 	public Double getPrecio() {
@@ -180,9 +189,17 @@ public class Producto {
 		}
 	}
 	
+	public List<String> getTallasDisponibles() {
+		return tallasDisponibles;
+	}
+
+	public void setTallasDisponibles(List<String> tallasDisponibles) {
+		this.tallasDisponibles = tallasDisponibles;
+	}
+
 	@Override
 	public String toString() {
-		return "Producto [producto_id=" + producto_id + ", precio=" + precio + ", imagen=" + imagen + ", descripcion="
+		return "Producto [producto_id=" + productoId + ", precio=" + precio + ", imagen=" + imagen + ", descripcion="
 				+ descripcion + ", nombre=" + nombre + ", cantidad_stock=" + cantidad_stock + ", lineaPedidos="
 				+ lineaPedidos + ", reseñas=" + reseñas + ", categorias=" + categorias + "]";
 	}

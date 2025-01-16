@@ -21,13 +21,14 @@ public class OrderLineService {
 	
 	
 	
-	public LineaPedido crearLineaPedido(Long idPedido, Long idProducto) {
-		
-		LineaPedido lineaPedido = orderLineRepository.findByPedidoAndProducto(idPedido, idProducto);
-		
-		if(lineaPedido == null) {
-			Pedido pedido =  new Pedido();
-		}
-		return lineaPedido;
-	}
+//	public LineaPedido crearLineaPedido(Long idPedido, Long idProducto) {
+//		
+//		LineaPedido lineaPedido = orderLineRepository.findByPedidoAndProducto(idPedido, idProducto);
+//		
+//		if(lineaPedido == null) {
+//			Pedido pedido =  new Pedido();
+//		}
+//		return lineaPedido;
+//	}
+	
 }

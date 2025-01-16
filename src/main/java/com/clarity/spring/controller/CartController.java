@@ -36,6 +36,10 @@ public class CartController {
 		if(userDetails == null) {
 			return "redirect: auth/login";
 		}
+		
+		  if (idProducto == null) {
+		        throw new IllegalArgumentException("ID del producto no proporcionado");
+		    }
 		cartService.agregarProdutoAcarrito(userDetails.getUsername(), idProducto);
 		return "redirect:/cart";
 	}
