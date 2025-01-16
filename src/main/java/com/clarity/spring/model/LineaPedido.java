@@ -41,18 +41,18 @@ public class LineaPedido {
 	}
 
 	public long getId_linea_pedido() {
-		return lineaPedidoId;
+		return lineaPedidoId;	
 	}
 
 	public void setId_linea_pedido(long id_linea_pedido) {
 		this.lineaPedidoId = id_linea_pedido;
 	}
 
-	public Double getPrecio_total() {
-		return precioTotal;
+	public Double getPrecioTotal() {
+		return producto.getPrecio() * this.cantidad;
 	}
 
-	public void setPrecio_total(Double precio_total) {
+	public void setPrecioTotal(Double precio_total) {
 		this.precioTotal = precio_total;
 	}
 

@@ -3,10 +3,13 @@
  <head th:replace="Layouts/head :: head ('Carrito')"></head>
 <body>
 <header th:replace="Layouts/header :: header"></header>
-<h1>Carrito de <p th:text="${usuario}"></p></h1>
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Tu Carrito</h2>
-    <table class="table align-middle">
+ <div th:if="${carritoVacio}">
+    
+    <h2 class="text-center text-muted mb-4">Tu Carrito esta vacio</h2>
+     </div>
+    <div th:if="${!carritoVacio}"> 
+    <table class="table align-middle " th:if="${listaPedidos.size() > 0}">
       <thead class="table-light">
         <tr>
           <th scope="col" class="text-center">Imagen</th>
@@ -20,41 +23,47 @@
       </thead>
       <tbody>
         <!-- Iterar sobre las líneas de pedido -->
-        <tr >
+        <tr th:each= "producto : ${listaPedidos}">
           <td class="text-center">
             <!-- Imagen del producto -->
-            <img src=" " alt="Imagen Producto" class="rounded" style="width: 80px;">
+            <img th:src="'/images/' + ${producto.producto.imagen}" alt="Imagen Producto" class="rounded" style="width: 80px;">
           </td>
           <td>
             <!-- Nombre y descripción del producto -->
-            <h6 class="mb-0" >Nombre Producto</h6>
-            <small class="text-muted" >Descripción breve del producto</small>
+            <h6 class="mb-0" th:text="${producto.producto.nombre}">Nombre Producto</h6>
+            <small class="text-muted" th:text="${producto.producto.descripcion}">Descripción</small>
           </td>
           <td>
             <!-- Talla del producto -->
-            <span class="badge bg-secondary" >Talla</span>
+            <select name="talla" class="badge bg-secondary">
+        <option th:each="talla : ${producto.producto.tallasDisponibles}" 
+                th:text="${talla}" >
+                <!-- th:text="${talla}"> -->
+        </option>
+    </select>
           </td>
           <td class="text-center">
             <!-- Formulario para actualizar cantidad -->
             <form th:action="@{/cart/update}" method="post" class="d-flex justify-content-center">
               <input type="hidden" name="lineaPedidoId" >
-              <input type="number" name="cantidad"  min="1"
+              <input type="number" name="cantidad" th:value="${producto.cantidad}"  min="1" th:max="${producto.producto.cantidad_stock}" 
                 class="form-control form-control-sm w-50 text-center">
               <button class="btn btn-outline-primary btn-sm ms-2" type="submit">Actualizar</button>
             </form>
           </td>
-          <td class="text-center">
+          <td class="text-center">	
             <!-- Precio unitario del producto -->
-            <span >0.00 €</span>
+            <span class="fs-5" th:text="${producto.producto.precio}" >0.00 €</span>
           </td>
           <td class="text-center">
             <!-- Subtotal de la línea de pedido -->
-            <span >0.00 €</span>
+            <span class="fs-5 fw-semibolder" th:text="${producto.getPrecioTotal()} + ' €'">0.00 €</span>
+
           </td>
           <td class="text-center">
             <!-- Formulario para eliminar línea de pedido -->
             <form th:action="@{/cart/delete}" method="post">
-              <input type="hidden" name="lineaPedidoId" >
+              <input type="hidden" name="lineaPedidoId" th:value="${}">
               <button class="btn btn-outline-danger btn-sm" type="submit">Eliminar</button>
             </form>
           </td>
@@ -62,13 +71,14 @@
       </tbody>
     </table>
     <!-- Resumen del total -->
-    <div class="d-flex justify-content-between align-items-center mt-4">
-      <h4 class="text-muted" >Total: 0.00 €</h4>
+    <div class="d-flex justify-content-between align-items-center mt-4" th:if="${pedidoUsuario != null}">
+      <h4 class="text-muted fs-1" th:text=" 'Total: ' + ${pedidoUsuario.calcularPrecioLineasPedido()} + '$' ">Total: 0.00 €</h4>
       <!-- Formulario para finalizar compra -->
       <form th:action="@{/cart/checkout}" method="post">
         <button class="btn btn-success btn-lg" type="submit">Finalizar Compra</button>
       </form>
     </div>
+     </div>
   </div>
 </body>
 </html>

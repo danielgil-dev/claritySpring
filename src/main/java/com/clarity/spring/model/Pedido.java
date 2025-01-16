@@ -101,7 +101,17 @@ public class Pedido {
 		this.lineasPedido.remove(lineaPedido);
 		lineaPedido.setPedido(null);
 	}
-
+	
+	public Double calcularPrecioLineasPedido() {
+		
+		double total = 0.0;
+		for(LineaPedido linea : this.lineasPedido) {
+			
+			total += linea.getPrecioTotal();
+		}
+		return total;
+	}
+	
 
 
 	public long getId_pedido() {

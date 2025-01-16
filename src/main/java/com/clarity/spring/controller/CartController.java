@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.clarity.spring.model.LineaPedido;
+import com.clarity.spring.model.Pedido;
+import com.clarity.spring.model.Usuario;
 import com.clarity.spring.service.CartService;
+import com.clarity.spring.service.OrderLineService;
 import com.clarity.spring.service.PedidoService;
+import com.clarity.spring.service.UserService;
 
 @Controller
 @RequestMapping("/cart")
@@ -26,15 +30,27 @@ public class CartController {
 	@Autowired
 	private PedidoService orderService;
 	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private OrderLineService orderLineService;
+	
 	@GetMapping
 	public String cartPage(@AuthenticationPrincipal UserDetails userDetails, Model model ) {
 		
 		if(userDetails== null) {
 			return "redirect: auth/login";
 		}
-		List<LineaPedido> lineaPedidos = this.orderService.listarPedidoUsuario(userDetails.);
-		model.addAttribute("usuario", usuario);
+		Usuario usuario = userService.getUserByEmail(userDetails.getUsername());
+		Pedido pedidoUsuario = this.orderService.listarPedidoUsuario(usuario);
+		List<LineaPedido> listaPedidos = pedidoUsuario != null ? pedidoUsuario.getLineasPedido() : null;
+
+		model.addAttribute("listaPedidos", listaPedidos);
+		model.addAttribute("carritoVacio", listaPedidos == null || listaPedidos.isEmpty());
+		model.addAttribute("pedidoUsuario",pedidoUsuario);
 		return "public/cart";
+		
 	}
 	
 	@PostMapping("/add")
@@ -48,6 +64,13 @@ public class CartController {
 		        throw new IllegalArgumentException("ID del producto no proporcionado");
 		    }
 		cartService.agregarProdutoAcarrito(userDetails.getUsername(), idProducto);
+		return "redirect:/cart";
+	}
+	
+	@PostMapping("/delete")
+	public String deleteOrderLine(@RequestParam Long pedidoId) {
+		
+		orderService.eliminarLineaPedido(pedidoId);
 		return "redirect:/cart";
 	}
 }

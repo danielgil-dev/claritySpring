@@ -38,7 +38,7 @@ public class ClarityApplication {
 			camisetaAzul.setTallasDisponibles(List.of("S", "M", "L", "XL", "XXL")); // Asignar tallas
 	        
 		    Producto zapatillasBlancas = new Producto(null, 59.99, "zapatillas-blancas.png", "Zapatillas deportivas blancas", "Zapatillas Blancas", 30L);
-			camisetaAzul.setTallasDisponibles(List.of("40", "41", "42", "43", "44")); // Asignar tallas
+			zapatillasBlancas.setTallasDisponibles(List.of("40", "41", "42", "43", "44")); // Asignar tallas
 			
 		    Producto guantesNegros = new Producto(null, 14.99, "guantes-marron.png", "Guantes de lana marron", "Guantes marron", 25L);
 			guantesNegros.setTallasDisponibles(List.of("S", "M", "L", "XL", "XXL")); // Asignar tallas

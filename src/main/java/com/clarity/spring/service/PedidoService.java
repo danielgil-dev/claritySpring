@@ -36,5 +36,13 @@ public class PedidoService {
 		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario,  EstadoPedido.Carrito);
 		return pedido;
 	}
+	
+	public void eliminarLineaPedido(Long pedidoId) {
+		
+		Pedido pedido = orderRepository.findBypedidoId(null);
+		if(pedido != null) {
+			pedido.eliminarLineaPedido(null);
+		}
+	}
 
 }

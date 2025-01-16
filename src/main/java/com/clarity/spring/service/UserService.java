@@ -42,6 +42,11 @@ public class UserService {
 		
 	}
 	
+	public Usuario getUserByEmail(String email) {
+		Usuario usuario = userRepository.findByEmail(email);
+		return usuario;
+	}
+	
 	 private boolean esDniValido(String dni) {
 	        if (!Pattern.matches(regexDni, dni)) {
 	            return false;

@@ -70,7 +70,7 @@ public class CartService {
 			lineaPedido.setCantidad(1L);
 			lineaPedido.setProducto(producto);
 			lineaPedido.setPedido(pedido);
-			lineaPedido.setPrecio_total(lineaPedido.calcularTotalLinea(producto, lineaPedido.getCantidad()));
+			lineaPedido.setPrecioTotal(lineaPedido.calcularTotalLinea(producto, lineaPedido.getCantidad()));
 			pedido.getLineasPedido().add(lineaPedido);
 		} else {
 			actualizarLineaPedido(lineaPedido, producto, 1L);
@@ -88,7 +88,7 @@ public class CartService {
 			throw new IllegalArgumentException("Stock insuficiente para incrementar la cantidad");
 		}
 		lineaPedido.setCantidad(nuevaCantidad);
-		lineaPedido.setPrecio_total(lineaPedido.calcularTotalLinea(producto, nuevaCantidad));
+		lineaPedido.setPrecioTotal(lineaPedido.calcularTotalLinea(producto, nuevaCantidad));
 	}
 
 }

@@ -11,6 +11,8 @@ import com.clarity.spring.model.Producto;
 public interface OrderLineRepository extends JpaRepository<LineaPedido, Long > {
 	
 	LineaPedido findByPedidoAndProducto(Pedido pedido, Producto producto);
-	//List<LineaPedido> findByCantidadAndPrecioTotal(Pedido pedido);
+	LineaPedido findByProducto(Producto producto);
+	List<LineaPedido> findBylineaPedidoId(Long lineaPedidoId);
+	
 	
 }
