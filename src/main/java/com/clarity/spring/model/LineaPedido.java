@@ -14,8 +14,8 @@ public class LineaPedido {
 	@Id @Column(name = "id_linea_pedido") @GeneratedValue(strategy = GenerationType.IDENTITY )
 	private long lineaPedidoId;
 	
-	@Column(nullable = false)
-	private Double precio_total;
+	@Column(name="precio_total",nullable = false)
+	private Double precioTotal;
 	
 	@Column(nullable = false)
 	private Long cantidad;
@@ -34,7 +34,7 @@ public class LineaPedido {
 	}
 	public LineaPedido(long id_linea_pedido, Double precio_total, Long cantidad, Pedido pedido, Producto producto) {
 		this.lineaPedidoId = id_linea_pedido;
-		this.precio_total = precio_total;
+		this.precioTotal = precio_total;
 		this.cantidad = cantidad;
 		this.pedido = pedido;
 		this.producto = producto;
@@ -49,11 +49,11 @@ public class LineaPedido {
 	}
 
 	public Double getPrecio_total() {
-		return precio_total;
+		return precioTotal;
 	}
 
 	public void setPrecio_total(Double precio_total) {
-		this.precio_total = precio_total;
+		this.precioTotal = precio_total;
 	}
 
 	public Long getCantidad() {
@@ -87,7 +87,7 @@ public class LineaPedido {
 	
 	@Override
 	public String toString() {
-		return "LineaPedido [id_linea_pedido=" + lineaPedidoId + ", precio_total=" + precio_total + ", cantidad="
+		return "LineaPedido [id_linea_pedido=" + lineaPedidoId + ", precio_total=" + precioTotal + ", cantidad="
 				+ cantidad + ", pedido=" + pedido + ", producto=" + producto + "]";
 	}
 	

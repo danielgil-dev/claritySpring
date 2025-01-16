@@ -1,5 +1,7 @@
 package com.clarity.spring.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.clarity.spring.model.LineaPedido;
 import com.clarity.spring.service.CartService;
+import com.clarity.spring.service.PedidoService;
 
 @Controller
 @RequestMapping("/cart")
@@ -19,13 +23,16 @@ public class CartController {
 	@Autowired
 	private CartService cartService;
 	
+	@Autowired
+	private PedidoService orderService;
+	
 	@GetMapping
 	public String cartPage(@AuthenticationPrincipal UserDetails userDetails, Model model ) {
 		
 		if(userDetails== null) {
 			return "redirect: auth/login";
 		}
-		String usuario = userDetails.getUsername();
+		List<LineaPedido> lineaPedidos = this.orderService.listarPedidoUsuario(userDetails.);
 		model.addAttribute("usuario", usuario);
 		return "public/cart";
 	}
