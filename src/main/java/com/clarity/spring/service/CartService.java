@@ -60,7 +60,7 @@ public class CartService {
 		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario, EstadoPedido.Carrito);
 		if (pedido == null) {
 
-			pedido = crearNuevoCarrito(usuario, producto.getProducto_id());
+			pedido = crearNuevoCarrito(usuario, producto.getProductoId());
 			orderRepository.save(pedido);
 		}
 

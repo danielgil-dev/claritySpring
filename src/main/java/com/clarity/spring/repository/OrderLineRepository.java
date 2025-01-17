@@ -12,7 +12,7 @@ public interface OrderLineRepository extends JpaRepository<LineaPedido, Long > {
 	
 	LineaPedido findByPedidoAndProducto(Pedido pedido, Producto producto);
 	LineaPedido findByProducto(Producto producto);
-	List<LineaPedido> findBylineaPedidoId(Long lineaPedidoId);
+	LineaPedido findBylineaPedidoId(Long lineaPedidoId);
 	
 	
 }

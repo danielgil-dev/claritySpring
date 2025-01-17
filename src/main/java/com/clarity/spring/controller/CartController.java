@@ -43,7 +43,7 @@ public class CartController {
 			return "redirect: auth/login";
 		}
 		Usuario usuario = userService.getUserByEmail(userDetails.getUsername());
-		Pedido pedidoUsuario = this.orderService.listarPedidoUsuario(usuario);
+		Pedido pedidoUsuario = this.orderService.listarPedidoUsuarioEstadoCarrito(usuario);
 		List<LineaPedido> listaPedidos = pedidoUsuario != null ? pedidoUsuario.getLineasPedido() : null;
 
 		model.addAttribute("listaPedidos", listaPedidos);
@@ -68,9 +68,22 @@ public class CartController {
 	}
 	
 	@PostMapping("/delete")
-	public String deleteOrderLine(@RequestParam Long pedidoId) {
+	public String deleteOrderLine(@AuthenticationPrincipal UserDetails userDetails, @RequestParam Long lineaPedidoId) {
 		
-		orderService.eliminarLineaPedido(pedidoId);
+		Usuario usuario = userService.getUserByEmail(userDetails.getUsername());
+		Pedido pedidoUsuario = orderService.listarPedidoUsuarioEstadoCarrito(usuario);
+		
+		LineaPedido lineaPedidoEstadoCarrito = orderLineService.buscarLineaPedidoById(lineaPedidoId);
+		if(lineaPedidoEstadoCarrito != null) {
+			System.out.println("la linea no es nula");
+			if(pedidoUsuario.getLineasPedido().contains(lineaPedidoEstadoCarrito)) {
+				System.out.println("Aqui estoy hol");
+				pedidoUsuario.eliminarLineaPedido(lineaPedidoEstadoCarrito);
+				orderLineService.eliminarLineaPedido(lineaPedidoId);
+//			cartService.save
+			}
+		}
+	
 		return "redirect:/cart";
 	}
 }

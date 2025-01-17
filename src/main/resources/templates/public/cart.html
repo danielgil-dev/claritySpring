@@ -19,6 +19,8 @@
           <th scope="col" class="text-center">Precio</th>
           <th scope="col" class="text-center">Subtotal</th>
           <th scope="col" class="text-center">Acciones</th>
+          <th scope="col" class="text-center">Id producto</th>
+          
         </tr>
       </thead>
       <tbody>
@@ -32,13 +34,12 @@
             <!-- Nombre y descripción del producto -->
             <h6 class="mb-0" th:text="${producto.producto.nombre}">Nombre Producto</h6>
             <small class="text-muted" th:text="${producto.producto.descripcion}">Descripción</small>
-          </td>
           <td>
             <!-- Talla del producto -->
             <select name="talla" class="badge bg-secondary">
         <option th:each="talla : ${producto.producto.tallasDisponibles}" 
                 th:text="${talla}" >
-                <!-- th:text="${talla}"> -->
+               
         </option>
     </select>
           </td>
@@ -63,7 +64,7 @@
           <td class="text-center">
             <!-- Formulario para eliminar línea de pedido -->
             <form th:action="@{/cart/delete}" method="post">
-              <input type="hidden" name="lineaPedidoId" th:value="${}">
+              <input type="hidden" name="lineaPedidoId" th:value="${producto.producto.productoId}">
               <button class="btn btn-outline-danger btn-sm" type="submit">Eliminar</button>
             </form>
           </td>

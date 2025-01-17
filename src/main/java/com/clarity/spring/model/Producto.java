@@ -87,11 +87,11 @@ public class Producto {
 		this.categorias = categorias;
 	}
 
-	public Long getProducto_id() {
+	public Long getProductoId() {
 		return productoId;
 	}
 
-	public void setProducto_id(Long producto_id) {
+	public void setProductoId(Long producto_id) {
 		this.productoId = producto_id;
 	}
 

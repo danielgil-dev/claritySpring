@@ -72,9 +72,6 @@ public class Pedido {
 	}
 
 
-
-
-
 	@PrePersist
 	public void onCreateDate() {
 		//Antes de que JPA cree mi entidad pedido si no hay una fecha le asigno la fecha actual

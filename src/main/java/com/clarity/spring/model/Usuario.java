@@ -63,10 +63,6 @@ public class Usuario {
 	}
 	
 
-
-
-
-
 	public Usuario(Long id, @NotBlank(message = "Campo obligatorio") String telefono,
 			@NotBlank(message = "Campo obligatorio") String direccion,
 			@NotBlank(message = "Campo obligatorio") String nombre,

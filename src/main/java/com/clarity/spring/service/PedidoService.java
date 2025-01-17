@@ -31,18 +31,19 @@ public class PedidoService {
 		return new Pedido();
 
 	}
-	
-	public Pedido listarPedidoUsuario(Usuario usuario) {
-		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario,  EstadoPedido.Carrito);
+
+	public Pedido listarPedidoUsuarioEstadoCarrito(Usuario usuario) {
+		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario, EstadoPedido.Carrito);
 		return pedido;
 	}
-	
+
 	public void eliminarLineaPedido(Long pedidoId) {
-		
-		Pedido pedido = orderRepository.findBypedidoId(null);
-		if(pedido != null) {
+
+		Pedido pedido = orderRepository.findBypedidoId(pedidoId);
+		if (pedido != null) {
 			pedido.eliminarLineaPedido(null);
 		}
 	}
 
+	
 }
