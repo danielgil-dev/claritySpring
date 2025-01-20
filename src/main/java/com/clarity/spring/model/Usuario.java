@@ -41,7 +41,7 @@ public class Usuario {
 	private String email;
 	
 	@Column( nullable = false)
-	private String role = "usuario";
+	private String role = "USER";
 	
 	@Size( min= 9, message = "Debe proporcionar un dni valido ")
 	@Column(nullable = false, length=9, unique=true)

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head  th:replace="Layouts/head :: head ('checkOut')"></head>
+
+<body>
+<header th:replace="Layouts/header :: header"></header>
+  
+
+    <div class="container my-5">
+        <div class="row g-5">
+         <p class ="mark fs-1 text-center" th:if=" ${pedidoCarrito == null}">
+    Su pedido se ha realizado con exito
+	</p>
+	
+          
+            <div class="col-lg-8"  th:if="${pedidoCarrito != null}" >
+            
+             <div class="bg-warning-subtle text-black py-4 text-center">
+        <h2>Finaliza tu Pedido</h2>
+        <p>Completa tu información y confirma el pedido</p>
+    </div>
+                <div class="card border-0 shadow" >
+                    <div class="card-header bg-primary-subtle">
+                        <h4 class="mb-0">Información del Cliente</h4>
+                    </div>
+                    <div class="card-body">
+                 
+				
+                    <div>
+                        <form action="/cart/checkout/submit" method="post"  >
+                          
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="firstName" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Ej. Juan" required
+                                    th:value="${pedidoCarrito.usuario.nombre}">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="lastName" class="form-label">Apellidos</label>
+                                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Ej. Pérez" required
+                                    th:value="${pedidoCarrito.usuario.apellido}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Correo Electrónico</label>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="correo@ejemplo.com" required
+                                th:value="${pedidoCarrito.usuario.email}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Dirección</label>
+                                <input type="text" class="form-control" id="address" name="address" placeholder="Calle, número, colonia" required
+                                th:value="${pedidoCarrito.usuario.direccion}">
+                            </div>
+                         
+
+                       
+                            <div class="mt-4">
+                                <h5>Método de Pago</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" data-bs-toggle="collapse" data-bs-target="#creditCardForm" value="creditCard">
+                                    <label class="form-check-label" for="creditCard">Tarjeta de Crédito</label>
+                                </div>
+                            </div>
+
+                          
+                            <div class="collapse mt-4" id="creditCardForm">
+                                <h5>Detalles de la Tarjeta</h5>
+                                
+                                 <div th:if="${errores != null}" class="alert alert-danger">
+							        <ul>
+							            <li th:each="error : ${errores}" th:text="${error}"></li>
+							        </ul>
+   								 </div>
+   								 
+                                <div class="mb-3">
+                                    <label for="cardNumber" class="form-label">Número de Tarjeta</label>
+                                    <input type="text" class="form-control" id="cardNumber" name="numCar" placeholder="1234 5678 9012 3456">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="expiryDate" class="form-label">Fecha de Expiración</label>
+                                        <input type="text" class="form-control" id="expiryDate" name="expiryDate" placeholder="MM/AA">
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="cvv" class="form-label">CVV</label>
+                                        <input type="text" class="form-control" id="cvv" name="cvv" placeholder="123">
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="cardName" class="form-label">Nombre en la Tarjeta</label>
+                                    <input type="text" class="form-control" id="cardName" name="cardName" placeholder="Juan Pérez">
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 mt-4">Finalizar Compra</button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+            <div th:if="${pedidoCarrito != null}">
+            
+           
+            <div  class="col-lg-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header bg-primary-subtle">
+                        <h4 class="mb-0">Resumen del Pedido</h4>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush" th:each="linea : ${pedidoCarrito.lineasPedido}">
+                            <li class="list-group-item d-flex justify-content-evenly">
+                                <span th:text="${linea.producto.nombre}">Producto 1</span>
+                                <span th:text="${linea.cantidad}">Cantidad</span>
+                                <span th:text=" '$' + ${linea.producto.precio} ">Precio</span>
+                            </li>
+                        </ul>
+                        <hr>
+                        <div class="d-flex justify-content-between">
+                            <strong class="mark">Total:</strong>
+                            <strong th:text=" '$' + ${totalPedido} ">Total</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             </div>
+        </div>
+    </div>
+</body>
+</html>

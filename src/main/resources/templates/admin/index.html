@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head th:replace="Layouts/head :: head ('Administradores')"></head>
+<meta charset="UTF-8">
+<title>Zona Admin</title>
+</head>
+<body>
+<header th:replace="Layouts/header :: header" ></header>
+<body>
+
+	<div class="container mt-5">
+    <h1 class="text-center">Zona de Administradores</h1>
+    <p class="text-muted text-center">Gestión de productos</p>
+
+    <!-- Botón para agregar nuevo producto -->
+    <div class="text-end mb-3">
+        <a href="/admin/add/product" class="btn btn-success">
+            <i class="bi bi-plus-circle"></i> Crear nuevo producto
+        </a>
+    </div>
+
+    <!-- Tabla de productos -->
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Imagen</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                    <th scope="col">Stock</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterar sobre los productos -->
+                <tr th:each="producto : ${productos}">
+                    <th scope="row" th:text="${producto.productoId}">1</th>
+                    <td>
+                        <img th:src="'/images/' + ${producto.imagen}" alt="Producto" width="80">
+                    </td>
+                    <td th:text="${producto.nombre}">Nombre del producto</td>
+                    <td th:text="${producto.precio}">Precio</td>
+                    <td th:text="${producto.cantidad_stock}">Stock</td>
+                    <td>
+                        <!-- Botón Editar -->
+                        <a th:href="@{/admin/update/product/{id}(id=${producto.productoId})}" 
+                           class="btn btn-primary btn-sm">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <!-- Botón Eliminar -->
+                        <form th:action="@{/admin/delete/product/{id}(id=${producto.productoId})}" 
+                              method="post" class="d-inline">
+                            <button type="submit" class="btn btn-danger btn-sm" 
+                                    onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?');">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+	
+	
+</body>
+</html>

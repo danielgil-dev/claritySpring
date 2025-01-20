@@ -10,20 +10,16 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
+                    <!-- Menú de navegación -->
                     <ul class="navbar-nav mb-2 mb-lg-0 justify-content-center w-100">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/index">Home</a>
+                        <!-- Administradores -->
+                        <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                            <a class="nav-link active" href="/admin/index">Administradores</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <!-- Botón del dropdown -->
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                My Account
-                            </a>
-                            <!-- Contenido del dropdown -->
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/auth/login">Login</a></li>
-                                <li><a class="dropdown-item" href="/auth/register">Sign up</a></li>
-                            </ul>
+
+                        <!-- Usuarios normales y administradores -->
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/categories">Categories</a>
@@ -31,29 +27,48 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/products">Products</a>
                         </li>
+
+                        <!-- Usuario no autenticado -->
+                        <li class="nav-item dropdown" sec:authorize="isAnonymous()">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                My Account
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/auth/login">Login</a></li>
+                                <li><a class="dropdown-item" href="/auth/register">Sign up</a></li>
+                            </ul>
+                        </li>
                     </ul>
+
+                    <!-- Opciones adicionales -->
                     <div class="d-flex ms-auto align-items-center">
-                      <!-- Carrito -->
-                      <a href="/cart" class="btn btn-outline-success me-2 text-white border-0">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
-                              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
-                          </svg>
-                      </a>
-                      <!-- Buscador -->
-                      <form class="d-flex" role="search">
-                          <input class="form-control me-2 rounded-pill border-2 border-dark" type="search"
-                              placeholder="Search" aria-label="Search">
-                          <button class="btn btn-dark rounded-pill text-white border-2 border-white"
-                              type="submit">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
-                                  class="bi bi-search" viewBox="0 0 16 16">
-                                  <path
-                                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 
-                                  1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                              </svg>
-                          </button>
-                      </form>
-                  </div>
+                        <!-- Carrito: Visible solo para usuarios normales y administradores -->
+                        <a href="/cart" class="btn btn-outline-success me-2 text-white border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+                            </svg>
+                        </a>
+
+                        <!-- Buscar: Visible para todos -->
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2 rounded-pill border-2 border-dark" type="search"
+                                placeholder="Search" aria-label="Search">
+                            <button class="btn btn-dark rounded-pill text-white border-2 border-white"
+                                type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                                    class="bi bi-search" viewBox="0 0 16 16">
+                                    <path
+                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 
+                                    1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                                </svg>
+                            </button>
+                        </form>
+
+                        <!-- Cerrar sesión: Visible solo para usuarios autenticados -->
+                        <a href="/logout" class="btn btn-outline-danger ms-2" sec:authorize="isAuthenticated()">
+                            Logout
+                        </a>
+                    </div>
                 </div>
             </div>
         </nav>

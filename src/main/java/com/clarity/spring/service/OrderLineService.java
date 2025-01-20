@@ -24,9 +24,16 @@ public class OrderLineService {
 	
 	public LineaPedido buscarLineaPedidoById(Long lineaPedidoId) {
 		
-		System.out.println(lineaPedidoId);
+		
 		LineaPedido lineaPedido = orderLineRepository.findById(lineaPedidoId).orElse(null);
 		
+		return lineaPedido;
+	}
+	
+	public LineaPedido actualizarLineaPedido(Long lineaPedidoId, Long cantidad) {
+		LineaPedido lineaPedido = orderLineRepository.findById(lineaPedidoId).orElse(null);
+		lineaPedido.setCantidad(cantidad);
+		orderLineRepository.save(lineaPedido);
 		return lineaPedido;
 	}
 }

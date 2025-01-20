@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="Layouts/head :: head ('Producto')"></head>
+<meta charset="UTF-8">
+<title>Editar Producto</title>
+</head>
+<body>
+	<header th:replace="Layouts/header :: header"></header>
+<body>
+	<div class="container mt-5 bg-dark-subtle rounded shadow py-3">
+		<h1 class="text-center">Editar Producto</h1>
+		<form
+			th:action="@{/admin/update/product/{id}(id=${producto.productoId})}"
+			th:method="post" enctype="multipart/form-data">
+			<div class="mb-3">
+				<label for="nombre" class="form-label">Nombre del Producto</label> <input
+					type="text" class="form-control" id="nombre" name="nombre"
+					th:value="${producto.nombre}" required>
+			</div>
+			<div class="mb-3">
+				<label for="descripcion" class="form-label">Descripción</label>
+				<textarea class="form-control" id="descripcion" name="descripcion"
+					rows="3" th:text="${producto.descripcion}" required></textarea>
+			</div>
+			<div class="mb-3">
+				<label for="precio" class="form-label">Precio</label> <input
+					type="number" class="form-control" id="precio" name="precio"
+					step="0.01" th:value="${producto.precio}" required>
+			</div>
+			<div class="mb-3">
+				<label for="cantidadStock" class="form-label">Cantidad en
+					Stock</label> <input type="number" class="form-control" id="cantidadStock"
+					name="cantidadStock" th:value="${producto.cantidad_stock}" required>
+			</div>
+			<div class="mb-3">
+				<label for="tallasDisponibles" class="form-label">Tallas
+					Disponibles</label> <input type="text" class="form-control"
+					id="tallasDisponibles" name="tallasDisponibles"
+					th:value="${producto.tallasDisponibles}" required>
+			</div>
+			<div class="mb-3">
+				<label for="categorias" class="form-label">Categorías</label> <select
+					id="categorias" name="categoriasIds" class="form-select" multiple
+					required>
+					<option th:each="categoria : ${categorias}"
+						th:value="${categoria.categoria_id}"
+						th:selected="${producto.categorias.contains(categoria)}"
+						th:text="${categoria.nombre}"></option>
+				</select>
+			</div>
+			<div class="text-center">
+				<button type="submit" class="btn btn-primary">Editar
+					Producto</button>
+			</div>
+		</form>
+
+	</div>
+</body>
+</html>

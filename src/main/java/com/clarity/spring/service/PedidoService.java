@@ -18,7 +18,10 @@ public class PedidoService {
 
 	@Autowired
 	private OrderRepository orderRepository;
-
+	
+	@Autowired
+	private CartService cartService;
+	
 	public Pedido agregarPedidoAlCarrito(Long usuarioId, long productoId, long cantidad) {
 
 		Producto producto = productRepository.findById(productoId)
@@ -32,8 +35,11 @@ public class PedidoService {
 
 	}
 
-	public Pedido listarPedidoUsuarioEstadoCarrito(Usuario usuario) {
+	public Pedido listarPedidoUsuarioEstadoCarrito(Usuario usuario, Long productoId ){
 		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario, EstadoPedido.Carrito);
+		if(pedido == null) {
+			 cartService.crearNuevoCarrito(usuario, productoId);
+		}
 		return pedido;
 	}
 
@@ -43,6 +49,23 @@ public class PedidoService {
 		if (pedido != null) {
 			pedido.eliminarLineaPedido(null);
 		}
+	}
+	
+	public void validarPagoPedido() {
+		
+	}
+	public void agregarPedidoFinalizado(Usuario usuario) {
+		
+		Pedido pedido = orderRepository.findByUsuarioAndEstado(usuario, EstadoPedido.Carrito);
+		if(pedido != null) {
+			pedido.setEstado(EstadoPedido.Pendiente);
+			pedido.setPrecio(pedido.calcularPrecioLineasPedido());
+			pedido.setApellidos(usuario.getApellido());
+			pedido.setDireccion(usuario.getDireccion());
+			pedido.setNombre(usuario.getNombre());
+			orderRepository.save(pedido);
+		}
+		
 	}
 
 	

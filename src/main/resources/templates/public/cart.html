@@ -19,7 +19,6 @@
           <th scope="col" class="text-center">Precio</th>
           <th scope="col" class="text-center">Subtotal</th>
           <th scope="col" class="text-center">Acciones</th>
-          <th scope="col" class="text-center">Id producto</th>
           
         </tr>
       </thead>
@@ -46,8 +45,8 @@
           <td class="text-center">
             <!-- Formulario para actualizar cantidad -->
             <form th:action="@{/cart/update}" method="post" class="d-flex justify-content-center">
-              <input type="hidden" name="lineaPedidoId" >
-              <input type="number" name="cantidad" th:value="${producto.cantidad}"  min="1" th:max="${producto.producto.cantidad_stock}" 
+              <input type="hidden" name="lineaPedidoId" th:value="${producto.getId_linea_pedido()}" >
+              <input type="number" name="nuevaCantidad" th:value="${producto.cantidad}"  min="1" th:max="${producto.producto.cantidad_stock}" 
                 class="form-control form-control-sm w-50 text-center">
               <button class="btn btn-outline-primary btn-sm ms-2" type="submit">Actualizar</button>
             </form>
@@ -64,7 +63,7 @@
           <td class="text-center">
             <!-- Formulario para eliminar línea de pedido -->
             <form th:action="@{/cart/delete}" method="post">
-              <input type="hidden" name="lineaPedidoId" th:value="${producto.producto.productoId}">
+              <input type="hidden" name="lineaPedidoId" th:value="${producto.getId_linea_pedido()}">
               <button class="btn btn-outline-danger btn-sm" type="submit">Eliminar</button>
             </form>
           </td>
@@ -80,6 +79,7 @@
       </form>
     </div>
      </div>
+  
   </div>
 </body>
 </html>
