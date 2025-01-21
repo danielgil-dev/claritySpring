@@ -27,9 +27,7 @@ public class UserService {
 		if(userRepository.existsByemail(email)) {
 			throw new Exception("El correo ya esta en uso");
 		}
-		if(!esDniValido(dni)) {
-			throw new Exception("Formato de dni incorrecto");
-		}
+	
 		Usuario usuario = new Usuario();
 		usuario.setNombre(nombre);
 		usuario.setApellido(apellido);
@@ -47,15 +45,5 @@ public class UserService {
 		return usuario;
 	}
 	
-	 private boolean esDniValido(String dni) {
-	        if (!Pattern.matches(regexDni, dni)) {
-	            return false;
-	        }
 
-	        String numeros = dni.substring(0, 8);
-	        char letra = dni.charAt(8);
-
-	        int indice = Integer.parseInt(numeros) % 23;
-	        return letrasDni.charAt(indice) == letra;
-	    }
 }

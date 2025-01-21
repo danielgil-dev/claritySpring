@@ -84,7 +84,7 @@ public class ClarityApplication {
 
 	}
 	
-	
+
 	@Bean
 	CommandLineRunner initData(CategoryRepository categoryRepository, ProductRepository productRepository) {
 	    return (args) -> {
@@ -95,7 +95,7 @@ public class ClarityApplication {
 			usuarioAdministrador.setDireccion("Calle 133");
 			usuarioAdministrador.setEmail("danielAdmin@gmail.com");
 			usuarioAdministrador.setContrasenya(passwordEncoder.encode("admin123"));
-			usuarioAdministrador.setDni("29151244D");
+			usuarioAdministrador.setDni("29125244D");
 			usuarioAdministrador.setTelefono("655622212");
 			usuarioAdministrador.setRole("ADMIN");
 			userRepository.save(usuarioAdministrador);
@@ -179,6 +179,6 @@ public class ClarityApplication {
 	}
 
 	*/
-
+	
 }
 

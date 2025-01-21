@@ -48,15 +48,29 @@ public class CartController {
 	@GetMapping
 	public String cartPage(@AuthenticationPrincipal UserDetails userDetails, Model model, @RequestParam(required = false) Long idProducto) {
 		
-		if(userDetails== null) {
+		if(userDetails== null ) {
 			return "redirect: auth/login";
 		}
+		
+		
+		
 		Usuario usuario = userService.getUserByEmail(userDetails.getUsername());
+		if(usuario.getRole() == "ADMIN") {
+			
+			return "redirect: admin/index";
+		
+		}
+		
 		Pedido pedidoUsuario = this.orderService.listarPedidoUsuarioEstadoCarrito(usuario,idProducto);
 		List<LineaPedido> listaPedidos = pedidoUsuario != null ? pedidoUsuario.getLineasPedido() : null;
 		model.addAttribute("listaPedidos", listaPedidos);
 		model.addAttribute("carritoVacio", listaPedidos == null || listaPedidos.isEmpty());
 		model.addAttribute("pedidoUsuario",pedidoUsuario);
+		
+		if(pedidoUsuario != null) {
+			model.addAttribute("total", String.format("%.2f", pedidoUsuario.calcularPrecioLineasPedido()));
+		}
+		
 		return "public/cart";
 
 	}

@@ -1,0 +1,4 @@
+2025-01-20 14:45:16.356734+01:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "DNI CHARACTER VARYING(9)": "'770041122X' (10)"
+Value too long for column "DNI CHARACTER VARYING(9)": "'770041122X' (10)"; SQL statement:
+insert into usuario (apellido,password,direccion,dni,email,nombre,role,telefono,id) values (?,?,?,?,?,?,?,?,default) [22001-232]
