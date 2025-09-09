@@ -127,14 +127,6 @@ This project demonstrates proficiency in:
 - Role-based access control
 - Form validation with Hibernate Validator
 
-## 🔮 Future Enhancements
-
-- Payment gateway integration
-- Product reviews and ratings system
-- Wishlist functionality
-- Email notifications
-- Advanced analytics
-- Mobile responsiveness improvements
 
 ## 👨‍💻 Author
 
